@@ -225,9 +225,30 @@ const bookSearchValidation = () => {
   ];
 };
 
+// Emergency simplified validation
+const validateBook = [
+  body('title').notEmpty().withMessage('Title required'),
+  body('author').notEmpty().withMessage('Author required'),
+  body('isbn').notEmpty().withMessage('ISBN required'),
+  body('genre').notEmpty().withMessage('Genre required'),
+  body('pages').isInt({ min: 1 }).withMessage('Pages must be positive number'),
+  body('description').notEmpty().withMessage('Description required'),
+  handleValidationErrors
+];
+
+const validateBookUpdate = [
+  body('title').optional().notEmpty(),
+  body('author').optional().notEmpty(),
+  body('isbn').optional().notEmpty(),
+  body('genre').optional().notEmpty(),
+  body('pages').optional().isInt({ min: 1 }),
+  body('description').optional().notEmpty(),
+  handleValidationErrors
+];
+
 module.exports = {
-  validateBook: [...bookValidationRules(), handleValidationErrors],
-  validateBookUpdate: [...updateBookValidationRules(), handleValidationErrors],
+  validateBook,
+  validateBookUpdate,
   validateObjectId,
   bookSearchValidation,
   handleValidationErrors
