@@ -20,8 +20,8 @@ const bookSchema = new mongoose.Schema({
     trim: true,
     validate: {
       validator: function(v) {
-        // Basic ISBN validation (10 or 13 digits with optional hyphens)
-        return /^(?:ISBN(?:-1[03])?:? )?(?=[X\d ]{9,17}$|97[89][X\d ]{10,16}$)[\d -]{9,16}[X\d]$/.test(v);
+        // ISBN validation for both ISBN-10 and ISBN-13 formats with hyphens
+        return /^(?:ISBN(?:-1[03])?:?\s*)?(?:97[89][\d\s\-]{1,}[\dX]|[\d\s\-]{9,}[\dX])$/.test(v);
       },
       message: 'Please enter a valid ISBN'
     }

@@ -34,7 +34,7 @@ const bookValidationRules = () => {
       .trim()
       .notEmpty()
       .withMessage('ISBN is required')
-      .matches(/^(?:ISBN(?:-1[03])?:? )?(?=[X\d ]{9,17}$|97[89][X\d ]{10,16}$)[\d -]{9,16}[X\d]$/)
+      .matches(/^(?:ISBN(?:-1[03])?:?\s*)?(?:97[89][\d\s\-]{1,}[\dX]|[\d\s\-]{9,}[\dX])$/)
       .withMessage('Please enter a valid ISBN'),
     
     body('genre')
