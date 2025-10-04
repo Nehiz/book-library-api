@@ -93,7 +93,7 @@ router.get('/:id', getAuthor);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Author'
+ *             $ref: '#/components/schemas/AuthorInput'
  *     responses:
  *       201:
  *         description: Author created successfully
@@ -129,7 +129,7 @@ router.post('/', validateAuthor, createAuthor);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Author'
+ *             $ref: '#/components/schemas/AuthorInput'
  *     responses:
  *       200:
  *         description: Author updated successfully

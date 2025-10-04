@@ -98,7 +98,7 @@ router.get('/:id', getBook);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Book'
+ *             $ref: '#/components/schemas/BookInput'
  *     responses:
  *       201:
  *         description: Book created successfully
@@ -134,7 +134,7 @@ router.post('/', validateBook, createBook);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Book'
+ *             $ref: '#/components/schemas/BookInput'
  *     responses:
  *       200:
  *         description: Book updated successfully

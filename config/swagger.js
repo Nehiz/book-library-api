@@ -18,14 +18,10 @@ const options = {
     ],
     components: {
       schemas: {
-        Book: {
+        BookInput: {
           type: 'object',
           required: ['title', 'author', 'isbn', 'genre', 'publishedDate', 'pages', 'description'],
           properties: {
-            _id: {
-              type: 'string',
-              description: 'MongoDB generated ID'
-            },
             title: {
               type: 'string',
               description: 'Book title',
@@ -93,45 +89,113 @@ const options = {
             }
           }
         },
-        Author: {
+        Book: {
           type: 'object',
-          required: ['firstName', 'lastName', 'email'],
           properties: {
             _id: {
               type: 'string',
               description: 'MongoDB generated ID'
             },
+            title: {
+              type: 'string',
+              description: 'Book title'
+            },
+            author: {
+              type: 'string',
+              description: 'Author name'
+            },
+            isbn: {
+              type: 'string',
+              description: 'ISBN number'
+            },
+            genre: {
+              type: 'string',
+              description: 'Book genre'
+            },
+            publishedDate: {
+              type: 'string',
+              format: 'date',
+              description: 'Publication date'
+            },
+            pages: {
+              type: 'integer',
+              description: 'Number of pages'
+            },
+            description: {
+              type: 'string',
+              description: 'Book description'
+            },
+            publisher: {
+              type: 'string',
+              description: 'Publisher name'
+            },
+            language: {
+              type: 'string',
+              description: 'Book language'
+            },
+            price: {
+              type: 'number',
+              description: 'Book price'
+            },
+            stockQuantity: {
+              type: 'integer',
+              description: 'Stock quantity'
+            },
+            inStock: {
+              type: 'boolean',
+              description: 'Whether book is in stock'
+            },
+            isAvailable: {
+              type: 'boolean',
+              description: 'Computed availability'
+            },
+            createdAt: {
+              type: 'string',
+              format: 'date-time',
+              description: 'Creation timestamp'
+            },
+            updatedAt: {
+              type: 'string',
+              format: 'date-time',
+              description: 'Last update timestamp'
+            }
+          }
+        },
+        AuthorInput: {
+          type: 'object',
+          required: ['firstName', 'lastName', 'email'],
+          properties: {
             firstName: {
               type: 'string',
               description: 'Author first name',
-              example: 'F. Scott'
+              example: 'Gabriel'
             },
             lastName: {
               type: 'string',
               description: 'Author last name',
-              example: 'Fitzgerald'
+              example: 'García Márquez'
             },
             email: {
               type: 'string',
               format: 'email',
               description: 'Author email',
-              example: 'fitzgerald@example.com'
+              example: 'gabriel.marquez@example.com'
             },
             biography: {
               type: 'string',
               description: 'Author biography',
-              example: 'American novelist and short story writer'
+              example: 'Colombian novelist and Nobel Prize winner'
             },
             birthDate: {
               type: 'string',
               format: 'date',
               description: 'Author birth date',
-              example: '1896-09-24'
+              example: '1927-03-06'
             },
             nationality: {
               type: 'string',
               description: 'Author nationality',
-              example: 'American'
+              example: 'Colombian'
             },
             website: {
               type: 'string',
@@ -143,6 +207,68 @@ const options = {
               type: 'boolean',
               description: 'Whether author is active',
               example: true
+            }
+          }
+        },
+        Author: {
+          type: 'object',
+          properties: {
+            _id: {
+              type: 'string',
+              description: 'MongoDB generated ID'
+            },
+            firstName: {
+              type: 'string',
+              description: 'Author first name'
+            },
+            lastName: {
+              type: 'string',
+              description: 'Author last name'
+            },
+            email: {
+              type: 'string',
+              format: 'email',
+              description: 'Author email'
+            },
+            biography: {
+              type: 'string',
+              description: 'Author biography'
+            },
+            birthDate: {
+              type: 'string',
+              format: 'date',
+              description: 'Author birth date'
+            },
+            nationality: {
+              type: 'string',
+              description: 'Author nationality'
+            },
+            website: {
+              type: 'string',
+              format: 'uri',
+              description: 'Author website'
+            },
+            isActive: {
+              type: 'boolean',
+              description: 'Whether author is active'
+            },
+            fullName: {
+              type: 'string',
+              description: 'Computed full name'
+            },
+            age: {
+              type: 'integer',
+              description: 'Computed age'
+            },
+            createdAt: {
+              type: 'string',
+              format: 'date-time',
+              description: 'Creation timestamp'
+            },
+            updatedAt: {
+              type: 'string',
+              format: 'date-time',
+              description: 'Last update timestamp'
             }
           }
         }
