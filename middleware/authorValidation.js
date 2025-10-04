@@ -175,8 +175,8 @@ const authorSearchValidation = () => {
 };
 
 module.exports = {
-  validateAuthor: [authorValidationRules(), handleValidationErrors],
-  validateAuthorUpdate: [updateAuthorValidationRules(), handleValidationErrors],
+  validateAuthor: [...authorValidationRules(), handleValidationErrors],
+  validateAuthorUpdate: [...updateAuthorValidationRules(), handleValidationErrors],
   authorSearchValidation,
   handleValidationErrors
 };
