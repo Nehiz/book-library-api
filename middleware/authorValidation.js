@@ -174,9 +174,24 @@ const authorSearchValidation = () => {
   ];
 };
 
+// Emergency simplified validation
+const validateAuthor = [
+  body('firstName').notEmpty().withMessage('First name required'),
+  body('lastName').notEmpty().withMessage('Last name required'),
+  body('email').isEmail().withMessage('Valid email required'),
+  handleValidationErrors
+];
+
+const validateAuthorUpdate = [
+  body('firstName').optional().notEmpty(),
+  body('lastName').optional().notEmpty(),
+  body('email').optional().isEmail(),
+  handleValidationErrors
+];
+
 module.exports = {
-  validateAuthor: [...authorValidationRules(), handleValidationErrors],
-  validateAuthorUpdate: [...updateAuthorValidationRules(), handleValidationErrors],
+  validateAuthor,
+  validateAuthorUpdate,
   authorSearchValidation,
   handleValidationErrors
 };
