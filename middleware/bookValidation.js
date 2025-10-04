@@ -226,8 +226,8 @@ const bookSearchValidation = () => {
 };
 
 module.exports = {
-  validateBook: [bookValidationRules(), handleValidationErrors],
-  validateBookUpdate: [updateBookValidationRules(), handleValidationErrors],
+  validateBook: [...bookValidationRules(), handleValidationErrors],
+  validateBookUpdate: [...updateBookValidationRules(), handleValidationErrors],
   validateObjectId,
   bookSearchValidation,
   handleValidationErrors
