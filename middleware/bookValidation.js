@@ -1,4 +1,17 @@
-const { body, param, query } = require('express-validator');
+const { body, param, query, validationResult } = require('express-validator');
+
+// Middleware to handle validation results
+const handleValidationErrors = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      success: false,
+      message: 'Validation failed',
+      errors: errors.array()
+    });
+  }
+  next();
+};
 
 // Book validation rules
 const bookValidationRules = () => {
@@ -213,8 +226,9 @@ const bookSearchValidation = () => {
 };
 
 module.exports = {
-  validateBook: bookValidationRules,
-  validateBookUpdate: updateBookValidationRules,
+  validateBook: [bookValidationRules(), handleValidationErrors],
+  validateBookUpdate: [updateBookValidationRules(), handleValidationErrors],
   validateObjectId,
-  bookSearchValidation
+  bookSearchValidation,
+  handleValidationErrors
 };

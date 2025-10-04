@@ -14,6 +14,12 @@ router.get('/', (req, res) => {
   });
 });
 
+// Add debug middleware BEFORE mounting routes
+router.use('/api/v1/authors', (req, res, next) => {
+  console.log('🔍 Authors route hit:', req.method, req.originalUrl);
+  next();
+});
+
 // API v1 routes
 router.use('/api/v1/books', require('./books'));
 router.use('/api/v1/authors', require('./authors'));

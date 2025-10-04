@@ -12,6 +12,12 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const dbUri = process.env.MONGODB_URI;
 
+// Debug middleware - log all requests
+app.use((req, res, next) => {
+  console.log(`🌐 ${req.method} ${req.originalUrl} - ${new Date().toISOString()}`);
+  next();
+});
+
 // Middleware
 app.use(cors());
 app.use(express.json());
