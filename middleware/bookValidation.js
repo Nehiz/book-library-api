@@ -231,6 +231,7 @@ const validateBook = [
   body('author').notEmpty().withMessage('Author required'),
   body('isbn').notEmpty().withMessage('ISBN required'),
   body('genre').notEmpty().withMessage('Genre required'),
+  body('publishedDate').notEmpty().withMessage('Published date required'),
   body('pages').isInt({ min: 1 }).withMessage('Pages must be positive number'),
   body('description').notEmpty().withMessage('Description required'),
   handleValidationErrors
