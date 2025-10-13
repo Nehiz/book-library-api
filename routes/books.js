@@ -7,7 +7,8 @@ const {
   updateBook,
   deleteBook
 } = require('../controllers/bookController');
-const { validateBook, validateBookUpdate } = require('../middleware/bookValidation'); 
+const { validateBook, validateBookUpdate } = require('../middleware/bookValidation');
+const { authenticateToken, optionalAuth } = require('../middleware/auth'); 
 
 /**
  * @swagger
@@ -93,6 +94,8 @@ router.get('/:id', getBook);
  *   post:
  *     summary: Create a new book
  *     tags: [Books]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -113,8 +116,10 @@ router.get('/:id', getBook);
  *                   $ref: '#/components/schemas/Book'
  *       400:
  *         description: Validation error
+ *       401:
+ *         description: Unauthorized - Authentication required
  */
-router.post('/', validateBook, createBook);
+router.post('/', authenticateToken, validateBook, createBook);
 
 /**
  * @swagger
@@ -122,6 +127,8 @@ router.post('/', validateBook, createBook);
  *   put:
  *     summary: Update a book
  *     tags: [Books]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -149,10 +156,12 @@ router.post('/', validateBook, createBook);
  *                   $ref: '#/components/schemas/Book'
  *       400:
  *         description: Validation error
+ *       401:
+ *         description: Unauthorized - Authentication required
  *       404:
  *         description: Book not found
  */
-router.put('/:id', validateBookUpdate, updateBook);
+router.put('/:id', authenticateToken, validateBookUpdate, updateBook);
 
 /**
  * @swagger
@@ -160,6 +169,8 @@ router.put('/:id', validateBookUpdate, updateBook);
  *   delete:
  *     summary: Delete a book
  *     tags: [Books]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -170,9 +181,11 @@ router.put('/:id', validateBookUpdate, updateBook);
  *     responses:
  *       200:
  *         description: Book deleted successfully
+ *       401:
+ *         description: Unauthorized - Authentication required
  *       404:
  *         description: Book not found
  */
-router.delete('/:id', deleteBook);
+router.delete('/:id', authenticateToken, deleteBook);
 
 module.exports = router;

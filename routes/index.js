@@ -9,12 +9,14 @@ router.get('/', (req, res) => {
     endpoints: {
       books: '/api/v1/books',
       authors: '/api/v1/authors',
+      authentication: '/api/v1/auth',
       documentation: '/api-docs'
     }
   });
 });
 
 // API v1 routes
+router.use('/api/v1/auth', require('./auth'));
 router.use('/api/v1/books', require('./books'));
 router.use('/api/v1/authors', require('./authors'));
 

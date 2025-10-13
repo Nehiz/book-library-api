@@ -8,6 +8,7 @@ const {
   deleteAuthor
 } = require('../controllers/authorController');
 const { validateAuthor, validateAuthorUpdate } = require('../middleware/authorValidation');
+const { authenticateToken, optionalAuth } = require('../middleware/auth');
 
 /**
  * @swagger
@@ -88,6 +89,8 @@ router.get('/:id', getAuthor);
  *   post:
  *     summary: Create a new author
  *     tags: [Authors]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -108,8 +111,10 @@ router.get('/:id', getAuthor);
  *                   $ref: '#/components/schemas/Author'
  *       400:
  *         description: Validation error
+ *       401:
+ *         description: Unauthorized - Authentication required
  */
-router.post('/', validateAuthor, createAuthor);
+router.post('/', authenticateToken, validateAuthor, createAuthor);
 
 /**
  * @swagger
@@ -117,6 +122,8 @@ router.post('/', validateAuthor, createAuthor);
  *   put:
  *     summary: Update an author
  *     tags: [Authors]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -144,10 +151,12 @@ router.post('/', validateAuthor, createAuthor);
  *                   $ref: '#/components/schemas/Author'
  *       400:
  *         description: Validation error
+ *       401:
+ *         description: Unauthorized - Authentication required
  *       404:
  *         description: Author not found
  */
-router.put('/:id', validateAuthorUpdate, updateAuthor);
+router.put('/:id', authenticateToken, validateAuthorUpdate, updateAuthor);
 
 /**
  * @swagger
@@ -155,6 +164,8 @@ router.put('/:id', validateAuthorUpdate, updateAuthor);
  *   delete:
  *     summary: Delete an author
  *     tags: [Authors]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -165,9 +176,11 @@ router.put('/:id', validateAuthorUpdate, updateAuthor);
  *     responses:
  *       200:
  *         description: Author deleted successfully
+ *       401:
+ *         description: Unauthorized - Authentication required
  *       404:
  *         description: Author not found
  */
-router.delete('/:id', deleteAuthor);
+router.delete('/:id', authenticateToken, deleteAuthor);
 
 module.exports = router;
