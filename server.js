@@ -14,13 +14,23 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const dbUri = process.env.MONGODB_URI;
 
+// Check for required environment variables
+if (!dbUri) {
+  console.error('❌ MONGODB_URI environment variable is required');
+  process.exit(1);
+}
+
+if (!process.env.JWT_SECRET) {
+  console.warn('⚠️ JWT_SECRET not found in environment variables. Using fallback for sessions.');
+}
+
 // Middleware
 app.use(cors());
 app.use(express.json());
 
 // Session configuration for OAuth
 app.use(session({
-  secret: process.env.JWT_SECRET,
+  secret: process.env.JWT_SECRET || 'fallback-session-secret-for-development-only',
   resave: false,
   saveUninitialized: false,
   cookie: {
